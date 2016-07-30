@@ -1,0 +1,406 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+
+
+.programstable th {height:20px}
+.btn-group-lg > .btn, .btn-lg {
+    padding: 8px;
+    font-size: 14px;
+    line-height: 1.33333;
+}
+li a:hover:not(.active) {
+    background-color: #3A65A5;
+	color: #FFF
+}
+
+
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #FFF;
+    cursor: default;
+    background-color: #3A65A5;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+textarea {
+    resize: none;
+}
+
+li.selected a {background-color: #3A65A5;}
+
+button {background-color:#008CBA;border:solid 1px; color:white; padding:5px; float:right;border-radius: 2px; height:2.5em}
+.btn {display: inline-block; border-radius: 4px;background-color: #008CBA; border: none;color: #FFFFFF;text-align: center;font-size: 15px;
+  padding: 8px;transition: all 0.5s;cursor: pointer; float:left}
+  .headtext {font-size: 16px; font-weight: 800; color: #0E2754}
+	button, input, optgroup, select, textarea {
+    margin: 10px;
+    font: inherit;
+    color: inh }
+	
+.attendbox { width:5%}	
+</style>
+<script>
+  
+planArray = ['prayer', 'outreach', 'visitation', 'fellowship', 'materials', 'others']
+function setHeader(obj, which) {
+		var contentFill = getID(planArray[which]).innerHTML;
+		getID('content').innerHTML = contentFill;
+		getID('whichplan').innerHTML = obj.innerHTML;
+		getID('content').setAttribute('name', planArray[which])
+	}
+	
+$(document).ready(function(){
+    var nowobj =  '{{tab}}';
+	if (nowobj == 'plans') {
+		getID("planmenu").click();
+	 }
+	else if (nowobj == 'reports') {
+		getID('reportmenu').click()
+	}
+	
+	else if (nowobj == 'activity') {
+		getID('activitymenu').click()
+	}
+	
+});
+
+function getEdit(obj, valid){
+	var editObjParent = obj.parentNode;
+	var editRow = editObjParent.parentNode;
+	var activContent = editRow.childNodes[3].innerHTML;
+	
+	getID('hiddenid').value = valid;
+	getID('activcontent').innerHTML = activContent;
+	getID('date').value = obj.innerHTML
+	getID('actoption').setAttribute('name', 'edit');
+	getID('whichact').innerHTML = "Edit Activity";
+	Show('activcontent'); Show('date');
+	
+}
+
+function setAdder(){
+	getID('actoption').setAttribute('name', 'add');
+	getID('whichact').innerHTML = "Add Activity";
+}
+
+function deleteActivity(val, valid){
+	getID('whichdelete').innerHTML = "Sure You Deleting "+ val
+		getID('deleteid').value = valid;
+	}
+
+</script>
+<div class="container" style='margin-left:0;padding-left:0'>
+
+	<p style="font-family: 'Cabin', sans-serif;font-size: 1.2em; font-weight:bold; color:#3A65A5"><strong>{{cell.cellname}}&nbsp Cell Portal </strong> </p>
+ 
+ 
+  <br><br>
+  <div class="row">
+  <ul class="nav nav-tabs" style='width:90%'>
+    <li class="active"><a data-toggle="tab" id='achievements' href="#home">Achievement</a></li>
+	<li><a data-toggle="tab" id='reportmenu' href="#menu1">Report</a></li>
+    <li><a data-toggle="tab" id='planmenu' href="#menu2">Month Plan&nbsp;&nbsp;&nbsp;&nbsp</a></li>
+    <li><a data-toggle="tab" id='activitymenu' href="#menu3">Activity</a></li>
+	
+  </ul>
+</div>
+<div class="tab-content">
+    <div id="home" class="tab-pane fade in active"><br>
+      <p><strong>Achievements year to date</strong></p>
+      <p>Please list your achievements and soul winning exploits so far here with pictures</p>
+    </div>
+	
+<div id="menu2" class="tab-pane fade"><br>
+      <br>
+<div class="table-responsive" style='width:90%'>
+  <table class="table table-condensed table-bordered programstable" ><span style='font-size: 16px; font-weight: 800; color: #0E2754'>Plans for this month</span><br><br>
+    <thead>
+      <tr>
+        <th >Plan Type</th>
+        <th >Details</th>
+      </tr>
+    </thead>
+    <tbody>
+		
+      <tr>
+        <td width='25%'><a onclick="setHeader(this, 0)" data-toggle="modal" data-target="#myModal">Prayer &nbsp<span class="glyphicon glyphicon-pencil"></span></a></td>
+        <td id='prayer'>{{plans.prayer}}</td>
+		
+      </tr>
+	 <tr>
+		 <td width='25%'><a onclick="setHeader(this, 1)" data-toggle="modal" data-target="#myModal">Outreach and soulwinning &nbsp<span class="glyphicon glyphicon-pencil"></span></a></td>
+		<td id='outreach'>{{plans.outreach}}</td>
+		
+	 </tr>
+	  <tr>
+		 <td width='25%'><a onclick="setHeader(this, 2)" data-toggle="modal" data-target="#myModal">Follow up and visitation &nbsp<span class="glyphicon glyphicon-pencil"></span></a></td>
+		<td id='visitation'>{{plans.visitation}}</td>
+	 </tr>
+	   <tr>
+		<td width='25%'><a onclick="setHeader(this, 3)" data-toggle="modal" data-target="#myModal">Fellowship &nbsp<span class="glyphicon glyphicon-pencil"></span></a></td>
+		<td id='fellowship'>{{plans.fellowship}}</td>
+		
+	 </tr>
+	   <tr>
+		<td width='25%'><a onclick="setHeader(this, 4)" data-toggle="modal" data-target="#myModal">Material review &nbsp<span class="glyphicon glyphicon-pencil"></span></a></td>
+		<td id='materials'>{{plans.materials}}</td>
+	 </tr>
+	 <tr>
+		<td width='25%'><a onclick="setHeader(this, 5)" data-toggle="modal" data-target="#myModal">Other activities &nbsp<span class="glyphicon glyphicon-pencil"></span></a></td>
+		<td id='others'>{{plans.others }}</td>
+	 </tr>
+    </tbody>
+  </table>
+  </div
+
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <label class='headtext'>Add Plans for&nbsp<span id='whichplan'></span></label>
+        </div>
+        <div class="modal-body">
+			<form role="form" method="POST" id='modalform' action='/addplans'>
+			<div class="form-group">
+				<textarea class="form-control" id="content" name="content" rows='6' placeholder="Write Plans" ></textarea>
+			</div>
+			<input type='hidden' id='hiddenmenu' name='menu' value='plans'>
+			<input type='hidden' id='hiddencellid' name='cellid' value='{{cell.id}}'>
+			<button class="btn btn-default">Submit</button><span>&nbsp; &nbsp</span>
+			<button class="btn btn-default" style='background-color: red;'  data-dismiss="modal">Close</button>
+			</form>
+		</div><br><br>
+		 
+        </div>
+    </div>
+ </div>
+
+  
+</div>
+	
+  <div id="menu3" class="tab-pane fade"><br>
+  <div class="table-responsive" style='width:90%'>
+  <table class="table table-condensed table-bordered programstable" ><span style='font-size: 16px; font-weight: 800; color: #0E2754'>Activity list for this month</span><br>
+    <a style='float:right; width:'180px'>
+           <span class="glyphicon glyphicon-plus-sign" onclick='setAdder()' data-toggle="modal" data-target="#activityModal">Add-New</span>
+        </a> 
+	<thead>
+      <tr>
+        <th width='15%' style='text-align:center'>When</th>
+        <th >Details</th>
+		<th></th>
+      </tr>
+    </thead>
+    <tbody>
+	{% for act in monthact %}
+      <tr>
+        <td width='15%' align='center'><a data-toggle="modal" data-target="#activityModal" onclick="getEdit(this, '{{act.id}}')" >{{act.act_date | dateformat("%d-%m-%Y")}}</a></td>
+		<td>{{act.act_activ}}</td>
+		<td class='attendbox' align='center'><a data-toggle="modal" data-target="#deleteModal" onclick="deleteActivity('{{act.act_activ}}', '{{act.id}}')"><span class="glyphicon glyphicon-trash"></span></a></td>
+		
+      </tr>
+	{% endfor %}
+    </tbody>
+  </table>
+  </div
+</div><br>
+
+<!-- Modal -->
+  <div class="modal fade" id="activityModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <label class='headtext'><span id='whichact'></span></label>
+        </div>
+        <div class="modal-body">
+			
+			<form role="form" method="POST" id='activityform' action='/addactivity'>
+				<div class="form-group">
+				<input type='text' class = "form-control" onclick = "docal(this)" id="date" name="date"  placeholder="Date" required='required'>
+			</div>
+			<div class="form-group">
+				<textarea class="form-control" id="activcontent" name="activity" value='' rows='6' placeholder="Write Activity" required='required'></textarea>
+			</div>
+			<input type='hidden' id='actoption'>
+			<input type='hidden' id='hiddenmenu' name='menu' value='activity'>
+			<input type='hidden' id='hiddencellid' name='cellid' value='{{cell.id}}'>
+			<input type='hidden' id='hiddenid' name='act_id' value=''>
+			<button class="btn btn-default">Submit</button><span>&nbsp; &nbsp</span>
+			<button class="btn btn-default" style='background-color: red;'  data-dismiss="modal">Close</button>
+			</form>
+		</div><br><br>
+		 
+        </div>
+    </div>
+ </div>
+
+  <div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <label class='headtext'><span id='whichdelete'></span></label>
+        </div>
+        <div class="modal-body">
+			<form role="form" method="POST" id='deleteform' action='/delactivity'>
+			<input type='hidden' id='actoption'>
+			<input type='hidden' name='cellid' value='{{cell.id}}'>
+			<input type='hidden' id='hiddenmenu' name='menu' value='activity'>
+			<input type='hidden' id='deleteid' name='act_id' value=''>
+			<button class="btn btn-default">Submit</button><span>&nbsp; &nbsp</span>
+			<button class="btn btn-default" style='background-color: red;'  data-dismiss="modal">Close</button>
+			</form>
+		</div><br><br>
+		 
+        </div>
+    </div>
+ </div>
+
+</div>
+<div id="menu1" class="tab-pane fade"><br>
+<div class='element1'><br>
+<div class="table-responsive" style='width:90%'> 
+  <table class="table table-condensed table-bordered programstable" style='font-size: 12px;' ><span style='font-size: 16px; font-weight: 800; color: #0E2754'>Cell Report for Last 3 months</span><br>
+  <a href="{{url_for('weekreport', id=cell.id)}}" onclick="Show('')"  style='float:right; width:'180px'>
+           <span class="glyphicon glyphicon-plus-sign">Add-Report</span>
+        </a>
+    <thead>
+      <tr>
+		<th>Month</th>
+        <th >Name of Cell</th>
+        <th >Leader's Name</th>
+		<th >M/S</th>
+		<th >BS <br> Grps </th>
+		<th >Meeting <br> Held</th>
+		<th >Highest <br>Attend</th>
+		<th >Total <br>FT</th>
+		<th >Total <br>NC</th>
+		<th >Total <br>FWHS</th>
+		<th >Cell <br> Off</th>
+		<th >Cell <br>Seed</th>
+		<th >Total New <br>Cells</th>
+		<th >Total New <br> BS Class</th>
+      </tr>
+    </thead>
+    <tbody>
+	{%for line in monthdic %}
+        
+    {%for key, val in line.iteritems() %}
+	  <tr style='text-align:center'>
+        <td ><a href='#' onclick="alert('View Detailed Report. Comming Soon')">{{val['mntitle']}}</a></td>
+        <td width='10%'>{{cell.cellname}} </td>
+		<td align='left' width='15%'>{{cell.cellleader}}</td>
+		<td>{{val.get('totalms', '')}}</td>
+		<td>{{val.get('bsgrp', '')}}</td>
+		<td>{{val.get('cellmet', '')}}</td>
+		<td>{{val.get('highestatt', '')}}</td>
+		<td>{{val.get('totalft', '')}}</td>
+		<td>{{val.get('totalnc', '')}}</td>
+		<td>{{val.get('totalhs', '')}}</td>
+		<td>${{val.get('totaloff', '')}}</td>
+		<td>${{val.get('totalseed', '')}}</td>
+		<td>{{val.get('totalncells', '')}}</td>
+		<td>{{val.get('totalnewbs', '')}}</td>
+      </tr>
+	  {%endfor %}
+	 {%endfor%}
+    </tbody>
+  </table>
+  </div 
+</div><br>
+<div class='element2'><br>
+<div class="table-responsive" style='width:90%'>
+
+  <table class="table table-hover table-bordered programstable"><strong><span style='font-size: 16px; font-weight: 800; color: #0E2754'>Cell Members Report for {{thm}}</span></strong><br>
+ <a href="#form1" onclick="Show('form1')" style='float:right; width:'180px'>
+           <span class="glyphicon glyphicon-plus-sign">Add-Member</span>
+        </a>
+    <thead>
+      <tr>
+        <th width='20%'>Members Name</th>
+        <th class='attendbox'>Wk1</th>
+        <th class='attendbox'>Wk2</th>
+		<th class='attendbox'>Wk3</th>
+        <th class='attendbox'>Wk4</th>
+        <th class='attendbox'>Wk5</th>
+		<th >Details if absent from meeting</th>
+		<th class='attendbox'></th>
+		<th class='attendbox'></th>
+      </tr>
+    </thead>
+    <tbody>
+	{% for mem in member %}
+      <tr>
+        <td><a href="{{url_for('singlemembreport', id=mem.id)}}">{{mem.memb_name }}</a></td>
+        <td >{{mem.memb_wk1}}</td>
+        <td>{{mem.memb_wk2}}</td>
+		<td>{{mem.memb_wk3}}</td>
+        <td>{{mem.memb_wk4}}</td>
+		<td>{{mem.memb_wk5}}</td>
+		<td>{{mem.memb_follow == 'Undone' and "" or mem.memb_comment}}</td>
+        <td> <a href='{{url_for('singlemembreport', id=mem.id)}}'><span class="glyphicon glyphicon-pencil"></span></a></td>
+		<td><a href='#' onclick="alert('OOPs! not yet')"><span class="glyphicon glyphicon-trash"></span></a></td>
+      </tr>
+	{% endfor %}
+    </tbody>
+  </table>
+  </div
+<div><br><br>
+<form role="form" method="POST" id='form1' style='display:none; padding-left:15%'>
+    <div class="form-group col-md-8">
+        <label class='headtext'>Add New Member</label>
+        <input type="text" class="form-control" id="name" name="memb_name" placeholder="Full Name" required='required'>
+    </div>
+	<div class="form-group col-md-8">
+        <input type="text" class="form-control" id="number" name="memb_contact" placeholder="Contact Number" required='required'>
+    </div>
+	<div class="form-group col-md-8">
+        <input type="text" class="form-control" id="email" name="memb_email" placeholder="Email" required='required'>
+    </div>
+	<div class="form-group col-md-8">
+        <input type="text" class="form-control" id="address" name="memb_address" placeholder="Residential Address" required='required'>
+    </div>
+	<div class="form-group col-md-8">
+       <label for="taskstatus" style='padding-right:10px'>Follow Up Status:</label>
+      <label class="radio-inline">
+      <input type="radio" name="memb_follow" id='notdone' onchange="Hide('taskstatusdiv')" value='Undone'>Not Done
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="memb_follow" id='progress' onchange="Show('taskstatusdiv')" value='Inprogress'>Have Followed Up
+    </label>
+    </div>
+    <div class="form-group col-md-8" id='taskstatusdiv' style='display:none'>
+		<input type="text" class="form-control" id="comment" name="memb_comment" placeholder="Comment if followed up">
+    </div>
+	<div class="form-group col-md-8">
+      <label for="sel1">Select Your Cell:</label>
+	<select class="form-control col-md-8" id="sel1" name='cellid' required='required'>
+		{% for c in cells %}
+        <option value='{{ c.id}}' {{ c.id == cell.id and 'selected' or 'disabled'}}>{{c.cellname}}</option>
+		{% endfor%}
+      </select>
+	</div>
+	
+	<br>
+	<div class="form-group col-md-8">
+    <button class="btn btn-default">Submit</button><span>&nbsp; &nbsp</span>
+    <button class="btn btn-default" style='background-color: red;'  onclick="Hide('form1')">Hide</button>
+	</div>
+</form>
+<br>
+</div>
+</div>
+</div>
+</div>
+ 
+{% endblock %}

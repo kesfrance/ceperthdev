@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+
+.programstable th {height:20px}
+.btn-group-lg > .btn, .btn-lg {
+    padding: 8px;
+    font-size: 14px;
+    line-height: 1.33333;
+}
+
+button {background-color:#008CBA;border:solid 1px; color:white; padding:5px; float:right;border-radius: 2px; height:2.5em}
+.btn {display: inline-block; border-radius: 4px;background-color: #008CBA; border: none;color: #FFFFFF;text-align: center;font-size: 15px;
+  padding: 8px;transition: all 0.5s;cursor: pointer; float:left}
+  .headtext {font-size: 16px; font-weight: 800; color: #0E2754}
+	button, input, optgroup, select, textarea {
+    margin: 10px;
+    font: inherit;
+    color: inh }
+	
+.attendbox { width:5%}
+.reportbox {width:40px}
+</style>
+<script>
+  
+</script>
+
+
+<div class='element1'><br>
+<div class="table-responsive" >
+  <form role="form" method="POST" id='reportform'>
+  <table class="table table-condensed table-bordered programstable" style='font-size: 12px;' ><span style='font-size: 16px; font-weight: 800; color: #0E2754'>Weekly Cell Report</span><br><br>
+    <thead>
+      <tr>
+		<th>Date</th>
+        <th >Name of Cell</th>
+		<th >BS <br> Grps </th>
+		<th >Meeting <br> Held</th>
+		<th >Total <br>Attend</th>
+		<th >Total <br>FT</th>
+		<th >Total <br>NC</th>
+		<th >Total <br>FWHS</th>
+		<th >Cell <br> Off</th>
+		<th >Cell <br>Seed</th>
+		<th >Total New <br>Cells</th>
+		<th >Total New <br> BS Class</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+		<td><input type=text onclick="docal(this)" placeholder='DD-MM-YYYY' style='width:90px' name='cmetdates' required='required'></td>
+		<td width='20%' style='vertical-align:middle'>{{cell.cellleader}}</td>
+		<td ><input type='number' min='1' class='reportbox' value='1' name='cmbsgrp'></td>
+		<td><select name='cmmet'>
+			<option value='N'>No</option>
+			<option value='Y'>Yes</option>
+		</select></td>
+		<td><input type='number' min='0' class='reportbox' name='cmtotalatt' value='0'></td>
+		<td><input type='number' min='0' class='reportbox' name='cmft' value='0'></td>
+		<td><input type='number' min='0' class='reportbox' name='cmnewcon' value='0'></td>
+		<td><input type='number' min='0' class='reportbox' name='cmholysprit' value='0'></td>
+		<td><input type='text' style='width:55px' name='cmoff' value='10'></td>
+		<td><input type='text' style='width:55px' name='cmseed' value='10'></td>
+		<td><input type='number' min='0' class='reportbox' name='cmnewcells' value='0'></td>
+		<td><input type='number' min='0' class='reportbox'  name='cmnewbsgrp' value='0'></td>
+		<td style='display:none'><input type='hidden' name='menu' value='reports'></td>
+      </tr>
+    </tbody>
+  </table>
+  <input type="button" class="btn btn-default" value="Go-Back" style='float:right;background-color: red;' onclick="goBack()">
+  <button class="btn btn-default" style='float:right'>Submit</button>
+</form> 
+</div 
+</div><br>
+
+ 
+{% endblock %}

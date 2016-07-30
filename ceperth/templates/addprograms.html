@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script>
+    function submitClose(args) {
+        res = document.getElementById('form').submit()
+        alert('res')
+    }
+</script>
+
+<h4>
+    Create New Program:
+</h4>
+
+<form role="form" method="POST" onsubmit="submitClose(); return false">
+    <div class="form-group">
+        <label for="title">Name</label>
+        <input type="text" class="form-control" id="progname" name="progname"" placeholder="Program Name" required>
+    </div>
+    <div class="form-group">
+        <label for="title">Brief Description of Topic</label>
+        <textarea class="form-control" id="progdesc" name="progdesc" placeholder="Program Description" rows="2"required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="content">Program Aim/Objective</label>
+        <textarea class="form-control" id="progaim" name="progaim" placeholder="Program Aim" rows="8" required></textarea>
+    </div>
+    <button class="btn btn-default">Submit</button>
+    <button class="btn btn-default" onlick="window.close()">Cancel</button>
+</form>
+{% endblock %}

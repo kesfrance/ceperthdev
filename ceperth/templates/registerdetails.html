@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+{%for u in registered %}
+
+<p>{{u.regisnum}},61{{u.regisname.replace(" ", '-')}}</p>
+
+{% endfor %}
+
+{%endblock %}

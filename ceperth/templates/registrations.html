@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+
+.programstable th {height:20px}
+.btn-group-lg > .btn, .btn-lg {
+    padding: 8px;
+    font-size: 14px;
+    line-height: 1.33333;
+}
+
+button {background-color:#008CBA;border:solid 1px; color:white; padding:5px; float:right;border-radius: 2px; height:2.5em}
+.btn {display: inline-block; border-radius: 4px;background-color: #008CBA; border: none;color: #FFFFFF;text-align: center;font-size: 15px;
+  padding: 8px;transition: all 0.5s;cursor: pointer; float:left}
+  .headtext {font-size: 16px; font-weight: 800; color: #0E2754}
+	button, input, optgroup, select, textarea {
+    margin: 10px;
+    font: inherit;
+    color: inh }
+
+
+</style>
+<script>
+	function Hide(target){
+		document.getElementById(target).style.display= "none";
+	}
+
+	function Show(target){
+		document.getElementById(target).style.display= "block";
+	}
+
+</script>
+
+
+
+
+<div class='element1'><br>
+<div class="table-responsive" >
+  <table class="table table-condensed table-bordered programstable" ><span style='font-size: 16px; font-weight: 800; color: #0E2754'>Details of Attendants </span><br><br>
+  <a href="#form1" onclick="Show('form1')" class="btn btn-info btn-lg bt2" style='float:right; width:'180px'>
+          <span class="glyphicon glyphicon-plus-sign" ></span>Register
+        </a>
+    <thead>
+      <tr>
+        <th >Program Name</th>
+        <th >Aim/Objective</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{sprog.progname}}</td>
+        <td >{{sprog.progaim}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+  </div
+</div><br>
+
+<div class="table-responsive">
+
+  <table class="table table-hover table-bordered programstable"><strong><span style='font-size: 16px; font-weight: 500; color: #0E2754'>Registrations: ({{num}} registered ).</span></strong><br><br>
+    <thead>
+      <tr>
+        <th>Date Entered</th>
+        <th>Full Name</th>
+        <th>Contact Number</th>
+		<th>Email</th>
+        <th>Address</th>
+        <th>Follow up Comments</th>
+		<th>Entered by</th>
+		<th>Registration Mode</th>
+		<th></th>
+		<th></th>
+      </tr>
+    </thead>
+    <tbody>
+	{% for r in registered %}
+      <tr>
+        <td>{{r.regisdate | dateformat("%d-%m-%Y")}}</td>
+        <td>{{r.regisname}}</td>
+        <td>{{r.regisnum}}</td>
+		<td>{{r.regisemail}}</td>
+        <td>{{r.regisadress}}</td>
+		{%if r.regisfollow == 'Inprogress' %}
+		<td>{{r.regisfollow}}: {{r.followcomment}} </td>
+		{% else %}
+		<td>{{r.regisfollow}} </td>
+		{%endif%}
+		<td>{{r.registrar.name}}  </td>
+		<td>{{r.regismode}}</td>
+        <td> <a href='#' onclick="alert('oops! not authorised')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+		<td><a href='#' onclick="alert('OOPs! not authorised')"><span class="glyphicon glyphicon-trash"></span></a></td>
+      </tr>
+	{% endfor%}
+    </tbody>
+  </table>
+  </div
+<div><br><br>
+<form role="form" method="POST" id='form1' style='display:none; padding-left:15%'>
+    <div class="form-group col-md-8">
+        <label class='headtext'>Register</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required='required'>
+    </div>
+	<div class="form-group col-md-8">
+        <input type="text" class="form-control" id="number" name="number" placeholder="Contact Number" required='required'>
+    </div>
+	<div class="form-group col-md-8">
+        <input type="text" class="form-control" id="email" name="email" placeholder="Email" required='required'>
+    </div>
+	<div class="form-group col-md-8">
+        <input type="text" class="form-control" id="address" name="address" placeholder="Residential Address" required='required'>
+    </div>
+	<div class="form-group col-md-8">
+       <label for="taskstatus" style='padding-right:10px'>Follow Up Status:</label>
+      <label class="radio-inline">
+      <input type="radio" name="status" id='notdone' onchange="Hide('taskstatusdiv')" value='Undone'>Not Done
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="status" id='progress' onchange="Show('taskstatusdiv')" value='Inprogress'>In Progress
+    </label>
+    </div>
+    <div class="form-group col-md-8" id='taskstatusdiv' style='display:none'>
+		<input type="text" class="form-control" id="comment" name="comment" placeholder="Comment if follow up in progress">
+    </div>
+	<div class="form-group col-md-8">
+      <label for="sel1">Entered By:</label>
+
+	  <select class="form-control" id="sel1" name='doer' required='required'>
+		{% for u in users %}
+        <option value='{{ u.id}}'>{{u.name}}</option>
+		{% endfor%}
+      </select>
+
+	  <div class="form-group">
+      <label for="sel1">Regis Mode:</label>
+
+	  <select class="form-control" id="sel1" name='mode' required='required'>
+        <option value='outreach'>Outreach</option>
+		 <option value='phone'>Phone/SMS</option>
+		<option value='inperson'>In Person</option>
+		<option value='leaders'>Leaders Invite</option>
+      </select>
+      <br>
+    </div>
+    <button class="btn btn-default">Submit</button><span>&nbsp; &nbsp</span>
+    <button class="btn btn-default" style='background-color: red;'  onclick="Hide('form1')">Hide</button>
+</form>
+<br><br><br>
+</div>
+
+
+
+{% endblock %}

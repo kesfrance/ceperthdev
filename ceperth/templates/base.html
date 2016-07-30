@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>CEPerthonline</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/ceperth.css') }}">
+   <link href='https://fonts.googleapis.com/css?family=Cabin:400,700' rel='stylesheet' type='text/css'>
+   <script type="text/javascript"  src="{{url_for('static', filename='js/calendar.js')}}"></script>
+   <script type="text/javascript"  src="{{url_for('static', filename='js/main.js')}}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  <style>
+ 
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse" id='navheaderbar'>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ url_for('posts') }}">CEPerthForum</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{ url_for('posts') }}"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Forum <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ url_for('posts') }}">Team Discussions</a></li>
+            <li><a href="{{url_for('add_post_get')}}">Create New </a></li>
+          </ul>
+        </li>
+     <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href='#'>Programs <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ url_for('programs')}}">Upcomming</a></li>
+          </ul>
+        </li>
+
+ <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href='#'>Leaders Lounge <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ url_for('leadersnotes')}}">Meeting Notes</a></li>
+            <li><a href="#"></a></li>
+          </ul>
+        </li>
+      <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href='#'>Cell Ministry <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href={{url_for('cells')}}>Cell Overview</a></li>
+          </ul>
+        </li>
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"></span> Admin</a></li>
+        <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+       <div  class="alert alert-{{ category }}">
+        <center>
+       {{ message }}
+       </center>
+       </div>
+       {% endfor %}
+       {% endif %}
+       {% endwith %}
+<div class="container-fluid" style='border: solid 0px #BDBBBB;margin-left:15px; margin-right: 15px; padding:5%; border-radius: 5px;background-color: #f5f4f4;'>
+   {%if current_user.is_authenticated() %}
+          <p style='position:relative; top: 0px'> Welcome, {{current_user.name.title()}}!!</p>
+           {%endif %}
+            {% block content %}{% endblock %}
+            <br>
+
+</div>
+
+</body>
+</html>

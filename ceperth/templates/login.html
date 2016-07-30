@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CEPerthForum</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body class='authbox'>
+<div id='content'>
+<br><br><br><br>
+{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+       <div class="alert alert-danger"">
+       <center>
+	   {{ message }}
+	   </center>
+       </div>
+       {% endfor %}
+       {% endif %}
+       {% endwith %}
+
+<br><br>
+<div class='container actionbox' style='max-width:400px; min-width: 300px'>
+
+	 <center>
+    <div class='headbanner'>CEPerthonline</div>
+    </center>
+
+<form method='post' role="form">
+
+
+    <h3>Log in</h3>
+	<div class="form-group" > 
+	<input type='email' id='email'  class="form-control" name='email' placeholder="Email address" required='required'>
+	</div>
+   
+   <div class="form-group" class="col-sm-4"> 
+	<input type=password id='password' class="form-control" name='password' placeholder="Password" required='required'>
+   </div>
+	<button class='loginbtn btn' type="submit"><span>Login</span></button>
+
+
+</form>
+</div>
+<br><br>
+
+</div>
+</body>
+</html>
+
+

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-10">
+        <h1>
+         <a class="title" href="/">Title here</a>
+        </h1>
+             <p>24/15 /2017 | Short Decsription</p> 
+    </div>
+</div>
+
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <label class='headtext'>Add an activity<span id='whichplan'></span></label>
+        </div>
+        <div class="modal-body">
+			
+			<form role="form" method="POST" id='form1' action='/addactivity'>
+				<div class="form-group">
+				<input class="form-control" onclick="docal(this)" id="date" name="date"  placeholder="Date" required='required'>
+			</div>
+			<div class="form-group">
+				<textarea class="form-control" id="content" name="activity" rows='6' placeholder="Write Activity" required='required'></textarea>
+			</div>
+			<input type='hidden' id='hiddenmenu' name='menu' value='activity'>
+			<button class="btn btn-default">Submit</button><span>&nbsp; &nbsp</span>
+			<button class="btn btn-default" style='background-color: red;'  data-dismiss="modal">Close</button>
+			</form>
+		</div><br><br>
+		 
+        </div>
+    </div>
+ </div>
+{% endblock  %}

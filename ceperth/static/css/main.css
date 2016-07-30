@@ -1,0 +1,75 @@
+
+h1, h2, h3, h4 {color: #052463;}
+.container {padding: 0.8em; width: 80em;}
+
+.title {font-size: 0.5em;}
+
+
+body {font-weight: normal; font-size: 1.3em;
+     font-family: "Open Sans", "Helvetica Neue", sans-serif;
+     background-color:#E9EEF1;}
+
+.authbox {background-color: #2A6496}
+
+.actionbox {background-color: #E0E0E0; border: solid 2px; border-color:#154875 ;border-radius:5px;
+    width:40%; min-height: 40px; position:absolute; left: 0 ;right:0; margin-left:auto; margin-right:auto;
+    font-size: 0.8em; }
+
+ .actionbox a {color: #666262}
+
+ td.login {font-weight: bold; font-size: 20px}
+ .actionbox td {padding-left: 20px}
+
+.signupbox {line-height: 170%; }
+.signuptext {position:absolute; right:10%}
+
+.btn {display: inline-block; border-radius: 4px;background-color: #008CBA; border: none;color: #FFFFFF;text-align: center;font-size: 15px;
+  padding: 8px;width: 80px;transition: all 0.5s;cursor: pointer;margin: 5px;}
+
+.btn span {cursor: pointer;display: inline-block;position: relative;transition: 0.5s;}
+
+.btn span:after {position: absolute;opacity: 0;}
+
+html {
+  height: 100%;
+}
+
+.navbar-inverse {
+    background-color: #337ab7;
+    border-color: #337ab7; 
+}
+@media (min-width: 768px)
+.navbar {
+     border-radius: 0px; 
+}
+
+.navbar-inverse .navbar-brand {
+    color: #EEE;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+    background-color: #2A6496;
+    background-image:linear-gradient(#2A6496, #282828);
+}
+#content{
+    background-color: transparent;
+    background-image:       linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent);
+  height:100%;
+  background-size:50px 50px;
+}
+
+
+.messageflash1{ font-size:12px; width: 30%; height: 1.8em; text-align:center;
+	   ;position:relative; left: 0 ;right:0; margin-left:auto; margin-right:auto;}
+
+.headbanner {background-color:#2A6496;; width: 100%; color: #FFF; height: 40px;
+padding-top: 10px; font-weight: bold; font-size: 16px}
+.title {font-size: 0.5em;}
+
+}
+
