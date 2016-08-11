@@ -5,10 +5,11 @@
 {% for post in posts %}
 
 {{ macros.render_post(post) }}
+
 {% endfor %}
 
 
-<ul class="pager">
+<ul class="pager pull-right">
     {% if has_next %}
     <li class="previous" >
     <a href="{{ url_for('posts', page=page + 1) }}">&larr; Older</a>

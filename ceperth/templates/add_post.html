@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<div class="col-sm-8 col-sm-offset-2" >
 <h1>
     Start A Forum:
 </h1>
@@ -17,8 +17,9 @@
     </div>
     <div class="form-group">
         <label for="content">Content</label>
-        <textarea class="form-control" id="content" name="content" placeholder="Post content" rows="20" required></textarea>
+        <textarea class="form-control" id="content" name="content" placeholder="Post content" rows="10" required></textarea>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
 {% endblock %}

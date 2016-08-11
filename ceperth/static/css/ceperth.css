@@ -1,5 +1,9 @@
+ 
+  
   .navbar {
      border-radius: 0px; 
+     margin-bottom: 40px;
+     height: 70px;
    }
 .navbar-inverse .navbar-nav>li>a {
     color: #fff;
@@ -12,7 +16,7 @@
   thead tr th, tbody tr th {
 	background-color: rgba(214, 214, 214, 0.48);
 	border: 1px solid #ddd;
-	font-size: 10px;
+	font-size: 12px;
 	padding: 8px;
     color:#0E2754;
     border-collapse: collapse;
@@ -23,7 +27,7 @@
 	padding: 4px;
 	background-color: #FFF;
 	vertical-align: top;
-	font-size:11px}
+	font-size:13px}
  
  html {
   height: 100%;
@@ -50,6 +54,9 @@ body {
   height: 100%;
     background-color: #2A6496;
     background-image:linear-gradient(#2A6496, #282828);
+    font-family: "chaparral-pro-1","chaparral-pro-2",Volkhov,"Times New Roman",serif;
+    font-size:13px;
+
 }
 #content{
     background-color: transparent;
